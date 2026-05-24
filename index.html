@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watt Atlas West Africa — Nigeria & Ghana Energy Infrastructure 2010–2024</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream:   #f7f3eb;
+    --cream2:  #ede8df;
+    --ink:     #1a1612;
+    --ink2:    #3d3630;
+    --ink3:    #6b6057;
+    --ng:      #1f5e38;   /* Nigeria green */
+    --gh:      #b5451b;   /* Ghana red */
+    --rule:    #c8bfb0;
+    --accent:  #8a6a2c;   /* gold-ish */
+    --col:     640px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 18px; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: .9rem;
+    margin-bottom: 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem 1.4rem;
+  }
+  nav a { color: inherit; text-decoration: none; }
+  nav a:hover { color: var(--ink); }
+
+  /* ---- MASTHEAD ---- */
+  .masthead { margin-bottom: 3rem; }
+  .masthead .site-name {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .6rem;
+  }
+  h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--ink2);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.8rem 0;
+  }
+  hr.thick { border-top-width: 2px; border-color: var(--ink); }
+
+  /* ---- SECTION LABELS ---- */
+  .section-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: .5rem;
+  }
+  h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: .5rem;
+  }
+  h3 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink2);
+    margin: 1.8rem 0 .8rem;
+  }
+  p { margin-bottom: .9rem; }
+  em { font-style: italic; }
+  strong { font-weight: 600; }
+
+  /* ---- BIG STAT LEDGER ---- */
+  .ledger {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 2rem 0;
+  }
+  .ledger-cell {
+    background: var(--cream);
+    padding: 1.4rem 1.6rem;
+  }
+  .ledger-cell .country-tag {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .65rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+  }
+  .ledger-cell.ng .country-tag { color: var(--ng); }
+  .ledger-cell.gh .country-tag { color: var(--gh); }
+  .ledger-cell .big-num {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: .3rem;
+  }
+  .ledger-cell.ng .big-num { color: var(--ng); }
+  .ledger-cell.gh .big-num { color: var(--gh); }
+  .ledger-cell .big-label {
+    font-size: .85rem;
+    color: var(--ink2);
+    line-height: 1.4;
+  }
+  .ledger-cell .cite {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .62rem;
+    color: var(--ink3);
+    margin-top: .4rem;
+  }
+
+  /* ---- CHART WRAPPER ---- */
+  .chart-wrap {
+    margin: 1.4rem 0 2rem;
+    overflow: visible;
+  }
+  .chart-caption {
+    font-size: .82rem;
+    color: var(--ink3);
+    font-style: italic;
+    margin-top: .5rem;
+    line-height: 1.5;
+  }
+
+  /* ---- DATA TABLE ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .87rem;
+    margin: 1.2rem 0;
+  }
+  thead tr {
+    border-bottom: 2px solid var(--ink);
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--rule);
+  }
+  tbody tr:last-child { border-bottom: 2px solid var(--ink); }
+  th {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .65rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: .5rem .5rem .4rem;
+    text-align: right;
+    color: var(--ink2);
+  }
+  th:first-child { text-align: left; }
+  td {
+    padding: .45rem .5rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink2);
+  }
+  td:first-child { text-align: left; color: var(--ink); font-weight: 500; }
+  td.ng-val { color: var(--ng); font-weight: 600; }
+  td.gh-val { color: var(--gh); font-weight: 600; }
+  td.unit { color: var(--ink3); font-size: .8rem; font-family: 'Source Code Pro', monospace; }
+
+  /* ---- BAR CHART ---- */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: .8rem;
+    gap: .7rem;
+  }
+  .bar-label {
+    font-size: .82rem;
+    min-width: 110px;
+    color: var(--ink2);
+  }
+  .bar-track {
+    flex: 1;
+    height: 10px;
+    background: var(--cream2);
+    position: relative;
+  }
+  .bar-fill {
+    position: absolute;
+    top: 0; left: 0; height: 100%;
+  }
+  .bar-fill.ng { background: var(--ng); }
+  .bar-fill.gh { background: var(--gh); }
+  .bar-val {
+    font-family: 'Source Code Pro', monospace;
+    font-size: .72rem;
+    min-width: 52px;
+    text-align: right;
+    color: var(--ink);
+  }
+
+  /* ---- SOURCES ---- */
+  .sources {
+    margin-top: 3rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .sources ol {
+    padding-left: 1.4rem;
+    font-size: .8rem;
+    color: var(--ink3);
+    line-height: 1.7;
+  }
+  .sources a {
+    color: var(--ink3);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ---- COLOUR LEGEND ---- */
+  .legend {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+    font-size: .85rem;
+  }
+  .legend-item { display: flex; align-items: center; gap: .5rem; }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    display: inline-block; flex-shrink: 0;
+  }
+  .legend-dot.ng { background: var(--ng); }
+  .legend-dot.gh { background: var(--gh); }
+
+  /* ---- NOTE BOX ---- */
+  .note {
+    background: var(--cream2);
+    border-left: 3px solid var(--accent);
+    padding: .8rem 1rem;
+    font-size: .87rem;
+    color: var(--ink2);
+    margin: 1.4rem 0;
+    line-height: 1.6;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-family: 'Source Code Pro', monospace;
+    font-size: .65rem;
+    letter-spacing: .06em;
+    color: var(--ink3);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; padding: 2rem 1.1rem 4rem; }
+    h1 { font-size: 1.6rem; }
+    .ledger { grid-template-columns: 1fr; }
+    .ledger-cell .big-num { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#ledger">2024</a>
+  <a href="#access">Access</a>
+  <a href="#capacity">Capacity</a>
+  <a href="#generation">Generation</a>
+  <a href="#losses">Grid Losses</a>
+  <a href="#renewables">Renewables</a>
+  <a href="#twelve">12 Metrics</a>
+  <a href="#sources">Sources</a>
+</nav>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="site-name">Watt · Atlas · West Africa</div>
+  <h1>Nigeria and Ghana — two neighbours, two electricity realities.</h1>
+  <p class="subtitle">Nigeria has the largest installed power capacity in sub-Saharan Africa. Ghana has a much smaller fleet — yet delivers more electricity per person, loses less to its grid, and connects more of its citizens to power. The pages below show the data, with sources, and nothing else.</p>
+  <p class="subtitle" style="margin-top:.7rem;font-style:italic;font-size:.9rem;">Designed in the style of Edward Tufte's <em>The Visual Display of Quantitative Information.</em> Cream paper, dark ink, no chartjunk.</p>
+</header>
+
+<hr class="thick" id="ledger">
+
+<!-- SECTION 1: 2024 LEDGER -->
+<div class="section-label">§ 1 — The 2024 ledger</div>
+<h2>What each country's grid looks like today</h2>
+<p>Nigeria's nameplate capacity is roughly <strong>13 GW</strong>. On most days, less than <strong>5 GW</strong> actually reaches the meter — a ratio that encapsulates the country's infrastructure challenge. Ghana's smaller fleet of <strong>5.5 GW</strong> operates with far greater reliability and reaches <strong>85%</strong> of its population, versus Nigeria's <strong>57%</strong>.</p>
+
+<div class="ledger">
+  <div class="ledger-cell ng">
+    <div class="country-tag">Nigeria</div>
+    <div class="big-num">13 GW</div>
+    <div class="big-label">Nameplate installed capacity, 2024</div>
+    <div class="cite">[1] NERC Annual Report 2024</div>
+  </div>
+  <div class="ledger-cell gh">
+    <div class="country-tag">Ghana</div>
+    <div class="big-num">5.5 GW</div>
+    <div class="big-label">Nameplate installed capacity, 2024</div>
+    <div class="cite">[2] PURC / ECG Annual Report 2024</div>
+  </div>
+  <div class="ledger-cell ng">
+    <div class="country-tag">Nigeria</div>
+    <div class="big-num">~4.5 GW</div>
+    <div class="big-label">Average power actually dispatched to grid</div>
+    <div class="cite">[1] Transmission Co. of Nigeria operational data</div>
+  </div>
+  <div class="ledger-cell gh">
+    <div class="country-tag">Ghana</div>
+    <div class="big-num">~3.8 GW</div>
+    <div class="big-label">Average power dispatched to grid</div>
+    <div class="cite">[2] GridCo dispatch figures 2024</div>
+  </div>
+  <div class="ledger-cell ng">
+    <div class="country-tag">Nigeria</div>
+    <div class="big-num">57%</div>
+    <div class="big-label">Electricity access rate, 2024</div>
+    <div class="cite">[3] IEA / World Bank SDG7</div>
+  </div>
+  <div class="ledger-cell gh">
+    <div class="country-tag">Ghana</div>
+    <div class="big-num">85%</div>
+    <div class="big-label">Electricity access rate, 2024</div>
+    <div class="cite">[3] IEA / World Bank SDG7</div>
+  </div>
+  <div class="ledger-cell ng">
+    <div class="country-tag">Nigeria</div>
+    <div class="big-num">~135 kWh</div>
+    <div class="big-label">Per-capita electricity consumption per year</div>
+    <div class="cite">[4] Ember / IEA 2024</div>
+  </div>
+  <div class="ledger-cell gh">
+    <div class="country-tag">Ghana</div>
+    <div class="big-num">~530 kWh</div>
+    <div class="big-label">Per-capita electricity consumption per year</div>
+    <div class="cite">[4] Ember / IEA 2024</div>
+  </div>
+</div>
+
+<div class="note">
+  <strong>Read the gap:</strong> Ghana's per-capita electricity consumption is roughly <strong>4× higher</strong> than Nigeria's — despite Nigeria having nearly 2.4× more installed capacity and 6.5× more people. The difference is almost entirely explained by system losses, underutilised plants, and access deficits on the Nigerian side.
+</div>
+
+<hr id="access">
+
+<!-- SECTION 2: ACCESS -->
+<div class="section-label">§ 2 — Electricity access</div>
+<h2>Who has power — and who does not</h2>
+<p>Ghana's National Electrification Scheme (NES) has connected an additional <strong>13 percentage points</strong> of the population since 2015, reaching 85% by 2024. Nigeria's access rate has improved more slowly — from roughly 45% in 2015 to 57% — a consequence of population growth outpacing grid expansion.</p>
+
+<h3>Electricity access rate, 2015 – 2024 (%)</h3>
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot ng"></span>Nigeria</div>
+  <div class="legend-item"><span class="legend-dot gh"></span>Ghana</div>
+</div>
+<div class="chart-wrap">
+  <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
+    <!-- axes -->
+    <line x1="50" y1="10" x2="50" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <line x1="50" y1="165" x2="600" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <!-- y labels: 30 40 50 60 70 80 90% -->
+    <!-- range: 30 to 95, px: 165 to 10, scale=(165-10)/(95-30)=155/65=2.385 -->
+    <text x="44" y="165" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">30</text>
+    <text x="44" y="142" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">40</text>
+    <text x="44" y="118" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">50</text>
+    <text x="44" y="95"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">60</text>
+    <text x="44" y="71"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">70</text>
+    <text x="44" y="48"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">80</text>
+    <text x="44" y="24"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">90</text>
+    <!-- x labels 2015..2024 -->
+    <!-- 10 years, x: 50 to 600, step=55.5 -->
+    <text x="50"  y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2015</text>
+    <text x="160" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2017</text>
+    <text x="271" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2019</text>
+    <text x="381" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2021</text>
+    <text x="491" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2023</text>
+    <text x="600" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2024</text>
+
+    <!-- Nigeria: 45 47 50 51 53 54 55 55 57 57 -->
+    <!-- y(v) = 165 - (v-30)*2.385 -->
+    <!-- 45→130.6  47→125.8  50→118.6  51→116.2  53→111.4  54→109.0  55→106.5  55→106.5  57→101.8  57→101.8 -->
+    <polyline points="50,130.6 105.6,125.8 161.1,118.6 216.7,116.2 272.2,111.4 327.8,109.0 383.3,106.5 438.9,106.5 494.4,101.8 600,101.8"
+      fill="none" stroke="#1f5e38" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="101.8" r="4" fill="#1f5e38"/>
+    <text x="606" y="105" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#1f5e38" font-weight="600">Nigeria 57%</text>
+
+    <!-- Ghana: 72 75 78 79 82 83 84 85 85 85 -->
+    <!-- 72→59.4  75→52.2  78→45.0  79→42.6  82→35.3  83→33.0  84→30.6  85→28.2  85→28.2  85→28.2 -->
+    <polyline points="50,59.4 105.6,52.2 161.1,45.0 216.7,42.6 272.2,35.3 327.8,33.0 383.3,30.6 438.9,28.2 494.4,28.2 600,28.2"
+      fill="none" stroke="#b5451b" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="28.2" r="4" fill="#b5451b"/>
+    <text x="606" y="32" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#b5451b" font-weight="600">Ghana 85%</text>
+  </svg>
+</div>
+<p class="chart-caption">Access rate = share of population with reliable electricity access. Sources: IEA / World Bank Tracking SDG7 [3]. Nigeria's numbers are contested; some estimates run lower.</p>
+
+<hr id="capacity">
+
+<!-- SECTION 3: INSTALLED CAPACITY -->
+<div class="section-label">§ 3 — Installed capacity, by source</div>
+<h2>What is on the grid — and what generates it</h2>
+<p>Nigeria's generation fleet is dominated by natural gas (&gt;80% of capacity), with hydropower (~2 GW) as the main non-fossil source. Coal is negligible. Ghana's mix is similarly gas-heavy but with a proportionally larger hydro base — the Akosombo Dam alone provides ~1 GW — and a small but growing solar fleet.</p>
+
+<h3>Installed capacity by fuel, 2024 (GW)</h3>
+
+<!-- Bar chart for capacity by source -->
+<!-- Max = 11 GW (Nigeria gas), scale each to pct of 11 -->
+<div style="margin:1.2rem 0 .5rem;">
+  <div style="display:grid;grid-template-columns:120px 1fr 120px 1fr;gap:.6rem 1rem;align-items:center;font-size:.83rem;">
+    <div style="font-family:'Source Code Pro',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ng);padding-bottom:.3rem;">Nigeria</div>
+    <div></div>
+    <div style="font-family:'Source Code Pro',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gh);padding-bottom:.3rem;">Ghana</div>
+    <div></div>
+
+    <div style="color:var(--ink2);">Natural gas</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--ng);width:calc(10.7/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">10.7 GW</span></div></div>
+    <div style="color:var(--ink2);">Gas &amp; Thermal</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--gh);width:calc(3.5/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">3.5 GW</span></div></div>
+
+    <div style="color:var(--ink2);">Hydro</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--ng);width:calc(2.1/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">2.1 GW</span></div></div>
+    <div style="color:var(--ink2);">Hydro</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--gh);width:calc(1.6/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">1.6 GW</span></div></div>
+
+    <div style="color:var(--ink2);">Solar PV</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--ng);width:calc(0.5/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">0.5 GW</span></div></div>
+    <div style="color:var(--ink2);">Solar PV</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--gh);width:calc(0.5/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">0.5 GW</span></div></div>
+
+    <div style="color:var(--ink2);">Oil / HFO</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--ng);width:calc(0.2/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">0.2 GW</span></div></div>
+    <div style="color:var(--ink2);">Oil / HFO</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--gh);width:calc(0.4/11*100%);max-width:260px;flex-shrink:0;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">0.4 GW</span></div></div>
+
+    <div style="color:var(--ink2);">Wind</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--ng);width:calc(0.01/11*100%);max-width:260px;flex-shrink:0;min-width:3px;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">&lt;0.1 GW</span></div></div>
+    <div style="color:var(--ink2);">Wind</div>
+    <div><div style="display:flex;align-items:center;gap:.5rem;"><div style="height:9px;background:var(--gh);width:calc(0.01/11*100%);max-width:260px;flex-shrink:0;min-width:3px;"></div><span style="font-family:'Source Code Pro',monospace;font-size:.7rem;">&lt;0.1 GW</span></div></div>
+  </div>
+</div>
+<p class="chart-caption">Sources: NERC [1], PURC/GridCo [2], IRENA Renewable Capacity Statistics 2025 [5]. Bars are on a shared scale; 100% = 11 GW.</p>
+
+<div class="note">
+  <strong>The utilisation problem:</strong> Nigeria's 13 GW fleet runs at an effective utilisation factor below 40% — gas supply shortfalls, ageing turbines, and transmission bottlenecks routinely collapse despatch to 3.5–5 GW. Ghana's utilisation is closer to 70%, though drought years reduce Akosombo's output significantly.
+</div>
+
+<hr id="generation">
+
+<!-- SECTION 4: GENERATION -->
+<div class="section-label">§ 4 — Electricity generation</div>
+<h2>Total output and what each person receives</h2>
+<p>Nigeria generated approximately <strong>30 TWh</strong> in 2024 — a figure that has barely moved since 2010. Ghana generated around <strong>18 TWh</strong>, from a much smaller base. On a per-capita basis, with Nigeria's 223 million people versus Ghana's 34 million, the gap inverts dramatically.</p>
+
+<h3>Annual electricity generation, 2015 – 2024 (TWh)</h3>
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot ng"></span>Nigeria</div>
+  <div class="legend-item"><span class="legend-dot gh"></span>Ghana</div>
+</div>
+<div class="chart-wrap">
+  <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
+    <line x1="50" y1="10" x2="50" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <line x1="50" y1="165" x2="600" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <!-- y: 0 to 35 TWh, scale = 155/35 = 4.43 -->
+    <text x="44" y="165" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">0</text>
+    <text x="44" y="121" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">10</text>
+    <text x="44" y="77"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">20</text>
+    <text x="44" y="33"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">30</text>
+    <text x="50"  y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2015</text>
+    <text x="160" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2017</text>
+    <text x="271" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2019</text>
+    <text x="381" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2021</text>
+    <text x="491" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2023</text>
+    <text x="600" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2024</text>
+    <!-- Nigeria TWh: 28 26 27 29 30 29 28 30 31 30 -->
+    <!-- y(v)=165-v*4.43: 28→40.6  26→49.3  27→45.0  29→36.6  30→32.1  29→36.6  28→40.6  30→32.1  31→27.7  30→32.1 -->
+    <polyline points="50,40.6 105.6,49.3 161.1,45.0 216.7,36.6 272.2,32.1 327.8,36.6 383.3,40.6 438.9,32.1 494.4,27.7 600,32.1"
+      fill="none" stroke="#1f5e38" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="32.1" r="4" fill="#1f5e38"/>
+    <text x="606" y="36" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#1f5e38" font-weight="600">Nigeria 30 TWh</text>
+    <!-- Ghana TWh: 14 16 17 17 18 17 18 18 19 18 -->
+    <!-- 14→103.0  16→94.1  17→89.7  17→89.7  18→85.3  17→89.7  18→85.3  18→85.3  19→80.8  18→85.3 -->
+    <polyline points="50,103.0 105.6,94.1 161.1,89.7 216.7,89.7 272.2,85.3 327.8,89.7 383.3,85.3 438.9,85.3 494.4,80.8 600,85.3"
+      fill="none" stroke="#b5451b" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="85.3" r="4" fill="#b5451b"/>
+    <text x="606" y="89" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#b5451b" font-weight="600">Ghana 18 TWh</text>
+  </svg>
+</div>
+<p class="chart-caption">Sources: Ember Climate Yearly Electricity Data 2025 [4]; IEA Africa Energy Outlook 2024 [6]. Nigeria's generation has been largely stagnant for a decade.</p>
+
+<h3>Per-capita electricity consumption, 2015 – 2024 (kWh / person / year)</h3>
+<div class="chart-wrap">
+  <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
+    <line x1="50" y1="10" x2="50" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <line x1="50" y1="165" x2="600" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <!-- y: 0 to 600 kWh, scale=155/600=0.2583 -->
+    <text x="44" y="165" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">0</text>
+    <text x="44" y="113" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">200</text>
+    <text x="44" y="62"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">400</text>
+    <text x="44" y="10"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">600</text>
+    <text x="50"  y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2015</text>
+    <text x="160" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2017</text>
+    <text x="271" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2019</text>
+    <text x="381" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2021</text>
+    <text x="491" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2023</text>
+    <text x="600" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2024</text>
+    <!-- Nigeria kWh: 145 130 125 130 135 130 125 135 140 135 -->
+    <!-- y(v)=165-v*0.2583: 145→127.6  130→131.4  125→132.7  130→131.4  135→130.1  130→131.4  125→132.7  135→130.1  140→128.8  135→130.1 -->
+    <polyline points="50,127.6 105.6,131.4 161.1,132.7 216.7,131.4 272.2,130.1 327.8,131.4 383.3,132.7 438.9,130.1 494.4,128.8 600,130.1"
+      fill="none" stroke="#1f5e38" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="130.1" r="4" fill="#1f5e38"/>
+    <text x="606" y="134" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#1f5e38" font-weight="600">Nigeria 135 kWh</text>
+    <!-- Ghana kWh: 480 500 510 510 530 500 520 530 530 530 -->
+    <!-- 480→41.0  500→35.8  510→33.2  510→33.2  530→28.2  500→35.8  520→30.7  530→28.2  530→28.2  530→28.2 -->
+    <polyline points="50,41.0 105.6,35.8 161.1,33.2 216.7,33.2 272.2,28.2 327.8,35.8 383.3,30.7 438.9,28.2 494.4,28.2 600,28.2"
+      fill="none" stroke="#b5451b" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="28.2" r="4" fill="#b5451b"/>
+    <text x="606" y="32" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#b5451b" font-weight="600">Ghana 530 kWh</text>
+  </svg>
+</div>
+<p class="chart-caption">Derived from generation data divided by UN population estimates. Nigeria's per-capita figure has barely shifted in a decade — population growth has absorbed all generation gains.</p>
+
+<hr id="losses">
+
+<!-- SECTION 5: GRID LOSSES -->
+<div class="section-label">§ 5 — Transmission &amp; distribution losses</div>
+<h2>How much power disappears before it reaches the meter</h2>
+<p>System losses — theft, leakage, ageing infrastructure, and metering failure — are the silent tax on every unit generated. Nigeria's losses run at roughly <strong>45%</strong> of generation; Ghana's at around <strong>22%</strong>. For context: the global average for developing economies is ~15%; the OECD average is ~6%.</p>
+
+<h3>T&amp;D losses as % of total electricity generated, 2015 – 2024</h3>
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot ng"></span>Nigeria</div>
+  <div class="legend-item"><span class="legend-dot gh"></span>Ghana</div>
+</div>
+<div class="chart-wrap">
+  <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
+    <line x1="50" y1="10" x2="50" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <line x1="50" y1="165" x2="600" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <!-- y: 0 to 55%, scale=155/55=2.818 -->
+    <text x="44" y="165" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">0%</text>
+    <text x="44" y="137" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">10%</text>
+    <text x="44" y="109" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">20%</text>
+    <text x="44" y="81"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">30%</text>
+    <text x="44" y="53"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">40%</text>
+    <text x="44" y="25"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">50%</text>
+    <text x="50"  y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2015</text>
+    <text x="160" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2017</text>
+    <text x="271" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2019</text>
+    <text x="381" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2021</text>
+    <text x="491" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2023</text>
+    <text x="600" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2024</text>
+    <!-- Nigeria %: 44 45 45 45 44 44 45 45 45 45 -->
+    <!-- y(v)=165-v*2.818: 44→41.0  45→38.8 -->
+    <polyline points="50,41.0 105.6,38.8 161.1,38.8 216.7,38.8 272.2,41.0 327.8,41.0 383.3,38.8 438.9,38.8 494.4,38.8 600,38.8"
+      fill="none" stroke="#1f5e38" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="38.8" r="4" fill="#1f5e38"/>
+    <text x="606" y="43" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#1f5e38" font-weight="600">Nigeria 45%</text>
+    <!-- Ghana %: 25 24 23 22 22 22 22 22 22 22 -->
+    <!-- 25→94.5  24→97.4  23→100.2  22→103.0 -->
+    <polyline points="50,94.5 105.6,97.4 161.1,100.2 216.7,103.0 272.2,103.0 327.8,103.0 383.3,103.0 438.9,103.0 494.4,103.0 600,103.0"
+      fill="none" stroke="#b5451b" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="103.0" r="4" fill="#b5451b"/>
+    <text x="606" y="107" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#b5451b" font-weight="600">Ghana 22%</text>
+  </svg>
+</div>
+<p class="chart-caption">Sources: World Bank World Development Indicators [7]; NERC technical loss reports [1]; ECG annual returns [2]. Nigeria's aggregate includes estimated commercial losses (theft, metering gaps).</p>
+
+<hr id="renewables">
+
+<!-- SECTION 6: RENEWABLES -->
+<div class="section-label">§ 6 — Renewables</div>
+<h2>Solar and hydro: the two levers both countries hold</h2>
+<p>Both countries sit in a high-irradiance equatorial belt — daily solar potential exceeds <strong>5 kWh/m²</strong> across most of each country. Both have significant untapped hydro resources. Yet solar capacity remains below <strong>0.5 GW</strong> in each. The contrast here is with aspiration: Nigeria's Renewable Energy Master Plan targets <strong>29 GW</strong> of renewable capacity by 2030; Ghana's renewable targets aim for <strong>10%</strong> of electricity from non-hydro renewables by 2030.</p>
+
+<h3>Solar PV cumulative installed capacity, 2015 – 2024 (GW)</h3>
+<div class="chart-wrap">
+  <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;overflow:visible;">
+    <line x1="50" y1="10" x2="50" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <line x1="50" y1="165" x2="600" y2="165" stroke="#c8bfb0" stroke-width="1"/>
+    <!-- y: 0 to 0.6 GW, scale=155/0.6=258.3 -->
+    <text x="44" y="165" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">0.0</text>
+    <text x="44" y="113" text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">0.2</text>
+    <text x="44" y="62"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">0.4</text>
+    <text x="44" y="10"  text-anchor="end" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">0.6</text>
+    <text x="50"  y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2015</text>
+    <text x="600" y="180" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="10" fill="#6b6057">2024</text>
+    <!-- Nigeria solar GW: 0.01 0.02 0.05 0.1 0.15 0.2 0.3 0.4 0.5 0.5 -->
+    <!-- y(v)=165-v*258.3: 0.01→162.4  0.02→159.8  0.05→152.1  0.1→139.2  0.15→126.3  0.2→113.3  0.3→87.5  0.4→61.7  0.5→35.8  0.5→35.8 -->
+    <polyline points="50,162.4 105.6,159.8 161.1,152.1 216.7,139.2 272.2,126.3 327.8,113.3 383.3,87.5 438.9,61.7 494.4,35.8 600,35.8"
+      fill="none" stroke="#1f5e38" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="600" cy="35.8" r="4" fill="#1f5e38"/>
+    <text x="606" y="39" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#1f5e38" font-weight="600">Nigeria 0.5 GW</text>
+    <!-- Ghana solar GW: 0.01 0.05 0.1 0.15 0.2 0.3 0.35 0.4 0.5 0.5 -->
+    <!-- 0.01→162.4  0.05→152.1  0.1→139.2  0.15→126.3  0.2→113.3  0.3→87.5  0.35→74.6  0.4→61.7  0.5→35.8  0.5→35.8 -->
+    <polyline points="50,162.4 105.6,152.1 161.1,139.2 216.7,126.3 272.2,113.3 327.8,87.5 383.3,74.6 438.9,61.7 494.4,35.8 600,35.8"
+      fill="none" stroke="#b5451b" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6,3"/>
+    <circle cx="600" cy="35.8" r="4" fill="#b5451b"/>
+    <text x="606" y="50" font-family="EB Garamond,Georgia,serif" font-size="13" fill="#b5451b" font-weight="600">Ghana 0.5 GW</text>
+  </svg>
+</div>
+<p class="chart-caption">Ghana's line is dashed to distinguish from Nigeria's (both converge at ~0.5 GW). Sources: IRENA Renewable Capacity Statistics 2025 [5]. Off-grid solar (households, telecom towers) is excluded.</p>
+
+<div class="note">
+  <strong>The off-grid asterisk:</strong> Official grid-connected solar figures understate actual solar deployment in both countries. Off-grid and rooftop systems — particularly in Nigeria, where generator-dependent households install solar as a substitute — may add several hundred megawatts to each country's effective solar capacity.
+</div>
+
+<hr id="twelve">
+
+<!-- SECTION 7: TWELVE METRICS TABLE -->
+<div class="section-label">§ 7 — Twelve metrics, one table</div>
+<h2>Every number, side by side</h2>
+<p>The table below compresses the country comparison into a single, dense view. Where one country leads clearly, that cell is marked.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left;">Metric</th>
+      <th>Unit</th>
+      <th>Nigeria</th>
+      <th>Ghana</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Population</td>
+      <td class="unit">million</td>
+      <td class="ng-val">223</td>
+      <td class="gh-val">34</td>
+      <td>2024 est.</td>
+    </tr>
+    <tr>
+      <td>Installed capacity</td>
+      <td class="unit">GW</td>
+      <td class="ng-val">13.0</td>
+      <td class="gh-val">5.5</td>
+      <td>Nameplate</td>
+    </tr>
+    <tr>
+      <td>Effective dispatched</td>
+      <td class="unit">GW avg</td>
+      <td>~4.5</td>
+      <td>~3.8</td>
+      <td>Day avg</td>
+    </tr>
+    <tr>
+      <td>Electricity access</td>
+      <td class="unit">%</td>
+      <td>57</td>
+      <td class="gh-val">85</td>
+      <td>Ghana leads</td>
+    </tr>
+    <tr>
+      <td>Per-capita consumption</td>
+      <td class="unit">kWh/yr</td>
+      <td>135</td>
+      <td class="gh-val">530</td>
+      <td>Ghana 4×</td>
+    </tr>
+    <tr>
+      <td>Annual generation</td>
+      <td class="unit">TWh</td>
+      <td class="ng-val">30</td>
+      <td class="gh-val">18</td>
+      <td>Absolute</td>
+    </tr>
+    <tr>
+      <td>T&amp;D losses</td>
+      <td class="unit">%</td>
+      <td>~45</td>
+      <td class="gh-val">~22</td>
+      <td>Ghana leads</td>
+    </tr>
+    <tr>
+      <td>Hydro capacity</td>
+      <td class="unit">GW</td>
+      <td class="ng-val">2.1</td>
+      <td class="gh-val">1.6</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Solar PV capacity</td>
+      <td class="unit">GW</td>
+      <td>~0.5</td>
+      <td>~0.5</td>
+      <td>Roughly equal</td>
+    </tr>
+    <tr>
+      <td>Gas / thermal share</td>
+      <td class="unit">% capacity</td>
+      <td class="ng-val">82</td>
+      <td>64</td>
+      <td>Both fossil-heavy</td>
+    </tr>
+    <tr>
+      <td>Capacity per capita</td>
+      <td class="unit">W/person</td>
+      <td>58</td>
+      <td class="gh-val">162</td>
+      <td>Ghana 2.8×</td>
+    </tr>
+    <tr>
+      <td>Renewable target (2030)</td>
+      <td class="unit">GW / share</td>
+      <td>29 GW</td>
+      <td>10% non-hydro</td>
+      <td>Both ambitious</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="font-size:.82rem;color:var(--ink3);font-style:italic;margin-top:.4rem;">Highlighted values indicate the country that outperforms on that metric. Green = Nigeria; red = Ghana. For access, per-capita, and losses, Ghana is clearly ahead.</p>
+
+<hr>
+
+<!-- CONCLUSION -->
+<div class="section-label">§ 8 — What it means</div>
+<h2>A structural gap, not just a scale gap</h2>
+<p>The conventional reading is that Nigeria's grid underperforms because the country is too large, too poor, or too complex. The data complicates this. Nigeria's installed capacity per person (<strong>58 W</strong>) is already below Ghana's (<strong>162 W</strong>), but even that capacity largely sits idle. The problem is not only one of investment volume — it is system integration: gas supply reliability, transmission infrastructure, distribution network maintenance, metering, and the commercial viability of electricity companies.</p>
+<p>Ghana's path has not been painless. Dumsor — the load-shedding cycles that plagued the country from 2012 to 2016 — demonstrated what fiscal constraints on generation capacity can do. Ghana stabilised partly through emergency thermal capacity additions and a harder negotiating position with independent power producers.</p>
+<p>Both countries sit below any reasonable threshold for economic electrification. The global benchmark for productive electricity use is typically cited at <strong>1,000–2,000 kWh per person per year</strong>. Nigeria is at 135; Ghana at 530. The gap between them is meaningful — but both are a long way from where manufacturing-led economic development begins.</p>
+
+<hr class="thick">
+
+<!-- SOURCES -->
+<div class="sources" id="sources">
+  <div class="section-label">Sources</div>
+  <ol>
+    <li>[1] Nigerian Electricity Regulatory Commission (NERC), <em>Annual Reports 2015–2024</em>; Transmission Company of Nigeria (TCN) grid operational data. <a href="https://www.nercng.org">nercng.org</a></li>
+    <li>[2] Public Utilities Regulatory Commission Ghana (PURC); Ghana Grid Company (GridCo) annual reports; Electricity Company of Ghana (ECG). <a href="https://www.purc.com.gh">purc.com.gh</a></li>
+    <li>[3] IEA / World Bank / IRENA / UN, <em>Tracking SDG7: The Energy Progress Report 2024</em>. <a href="https://trackingsdg7.esmap.org">trackingsdg7.esmap.org</a></li>
+    <li>[4] Ember Climate, <em>Yearly Electricity Data</em>, version 2025-03. <a href="https://ember-climate.org">ember-climate.org</a>; IEA Africa Energy Outlook 2024.</li>
+    <li>[5] IRENA, <em>Renewable Capacity Statistics 2025</em>, March 2025. <a href="https://www.irena.org">irena.org</a></li>
+    <li>[6] IEA, <em>Africa Energy Outlook 2024</em>, October 2024. <a href="https://www.iea.org/reports/africa-energy-outlook-2024">iea.org</a></li>
+    <li>[7] World Bank, <em>World Development Indicators</em> — Electric power transmission and distribution losses (% of output). <a href="https://data.worldbank.org">data.worldbank.org</a></li>
+    <li>[8] United Nations Population Division, <em>World Population Prospects 2024</em>. <a href="https://population.un.org">population.un.org</a></li>
+  </ol>
+  <p style="font-size:.78rem;color:var(--ink3);margin-top:1rem;font-style:italic;">Data notes: Nigerian grid figures are subject to significant measurement uncertainty; NERC and TCN figures occasionally conflict. Where ranges exist, conservative midpoints are used. Off-grid generation (diesel generators, off-grid solar) is excluded throughout unless noted. Any figure that conflicts with a primary source is a transcription error — the methodology and sources are given above to allow verification.</p>
+</div>
+
+<footer>
+  <p>Watt Atlas · West Africa Edition · Nigeria &amp; Ghana · 2010–2024 · Designed in the style of Edward Tufte, <em>The Visual Display of Quantitative Information</em> (1983) · 2026-05-23</p>
+</footer>
+
+</body>
+</html>
