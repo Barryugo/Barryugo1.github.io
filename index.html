@@ -3,393 +3,406 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Atlas — Economic Essays · Barry Ugochukwu</title>
+<title>The Long Run · Barry Ugochukwu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
-  /* ── Tokens ── */
   :root {
-    --parchment:   #f4efe4;
-    --parchment-2: #ebe4d3;
-    --parchment-3: #ddd5c0;
-    --ink:    #18160f;
-    --ink-2:  #3d3822;
-    --ink-3:  #7a7355;
-    --rule:   #cec4aa;
-    --gold:   #8a6a2c;
-
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-body:    'Crimson Pro', Georgia, serif;
-    --font-mono:    'IBM Plex Mono', monospace;
-
-    /* Status colours */
-    --published:   #4a7c3f;
-    --forthcoming: #7a7355;
+    --navy:       #001845;
+    --navy-2:     #002D72;
+    --blue:       #1F56D2;
+    --blue-light: #EEF3FC;
+    --blue-mid:   #D0DEFA;
+    --white:      #FFFFFF;
+    --off-white:  #F7F8FA;
+    --grey-1:     #F0F2F5;
+    --grey-2:     #D8DCE6;
+    --grey-3:     #9AA0B2;
+    --grey-4:     #5C6070;
+    --text:       #1A1C26;
+    --green:      #006644;
+    --forthcoming:#8C8C9A;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 18px; scroll-behavior: smooth; }
+  html { font-size: 16px; scroll-behavior: smooth; }
 
   body {
-    background:  var(--parchment);
-    color:       var(--ink);
-    font-family: var(--font-body);
-    min-height:  100vh;
+    background: var(--white);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* ── Site-level nav ── */
+  /* ── NAV ── */
   .site-nav {
-    padding:        1.2rem 3rem;
-    border-bottom:  1px solid var(--rule);
-    display:        flex;
-    align-items:    center;
+    background: var(--navy);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    flex-wrap:      wrap;
-    gap:            .5rem;
+    height: 56px;
   }
   .site-nav .brand {
-    font-family:    var(--font-mono);
-    font-size:      .7rem;
-    letter-spacing: .14em;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .18em;
     text-transform: uppercase;
-    color:          var(--gold);
+    color: #FFFFFF;
     text-decoration: none;
+    opacity: .9;
   }
-  .site-nav .nav-links {
-    display:    flex;
-    gap:        1.8rem;
+  .site-nav .brand span { color: #7BAAF7; opacity: 1; }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
     list-style: none;
   }
-  .site-nav .nav-links a {
-    font-family:    var(--font-mono);
-    font-size:      .62rem;
-    letter-spacing: .09em;
+  .nav-links a {
+    font-size: .75rem;
+    font-weight: 400;
+    letter-spacing: .06em;
     text-transform: uppercase;
-    color:          var(--ink-3);
+    color: rgba(255,255,255,.65);
     text-decoration: none;
+    transition: color .15s;
   }
-  .site-nav .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover { color: #fff; }
 
   /* ── HERO ── */
   .hero {
-    max-width:   900px;
-    margin:      0 auto;
-    padding:     5rem 3rem 0;
+    background: var(--navy);
+    padding: 5rem 3rem 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 40%;
+    background: linear-gradient(135deg, transparent 40%, rgba(31,86,210,.18) 100%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
   .hero-eyebrow {
-    font-family:    var(--font-mono);
-    font-size:      .66rem;
-    letter-spacing: .16em;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .2em;
     text-transform: uppercase;
-    color:          var(--ink-3);
-    margin-bottom:  1.2rem;
-    display:        flex;
-    align-items:    center;
-    gap:            .8rem;
+    color: #7BAAF7;
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
   }
   .hero-eyebrow::before {
     content: '';
     display: inline-block;
-    width:   2rem;
-    height:  1px;
-    background: var(--rule);
+    width: 2.5rem;
+    height: 2px;
+    background: var(--blue);
   }
-
   .hero h1 {
-    font-family:   var(--font-display);
-    font-size:     clamp(3rem, 8vw, 5.5rem);
-    font-weight:   900;
-    line-height:   .95;
-    color:         var(--ink);
-    letter-spacing: -.02em;
-    margin-bottom: 1.8rem;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 400;
+    line-height: 1;
+    color: #FFFFFF;
+    letter-spacing: -.01em;
+    margin-bottom: 1.6rem;
   }
   .hero h1 em {
     font-style: italic;
-    font-weight: 400;
-    color: var(--ink-2);
+    color: #7BAAF7;
   }
-
   .hero-desc {
-    max-width:   520px;
-    font-size:   1.1rem;
-    line-height: 1.7;
-    color:       var(--ink-2);
+    max-width: 520px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,.7);
     font-weight: 300;
-    margin-bottom: 1rem;
+    margin-bottom: 2.4rem;
   }
-
-  .hero-meta {
-    font-family:    var(--font-mono);
-    font-size:      .62rem;
-    letter-spacing: .08em;
+  .hero-pills {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .hero-pill {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .06em;
     text-transform: uppercase;
-    color:          var(--ink-3);
-    margin-top:     2rem;
-    display:        flex;
-    gap:            2rem;
-    flex-wrap:      wrap;
+    color: rgba(255,255,255,.55);
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: .35rem .9rem;
+    border-radius: 2px;
   }
-  .hero-meta span { display: flex; align-items: center; gap: .4rem; }
-  .hero-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rule); }
-  .hero-meta .dot.live { background: var(--published); }
+  .hero-pill .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.25);
+    flex-shrink: 0;
+  }
+  .hero-pill .dot.live { background: #4CAF89; }
 
-  /* ── RULE ── */
-  .section-rule {
+  /* ── DIVIDER ── */
+  .rule-bar {
+    height: 4px;
+    background: var(--blue);
     max-width: 900px;
-    margin:    2.5rem auto 0;
-    padding:   0 3rem;
-    border:    none;
-    border-top: 2px solid var(--ink);
+    margin: 0 3rem;
   }
+  @media(min-width:960px) { .rule-bar { margin: 0 auto; width: calc(100% - 6rem); max-width: 900px; } }
 
-  /* ── ARTICLES GRID ── */
+  /* ── ARTICLES SECTION ── */
   .articles-section {
     max-width: 900px;
-    margin:    0 auto;
-    padding:   2rem 3rem 6rem;
+    margin: 0 auto;
+    padding: 3rem 3rem 5rem;
   }
-
   .section-header {
-    display:         flex;
-    align-items:     baseline;
+    display: flex;
+    align-items: baseline;
     justify-content: space-between;
-    margin-bottom:   1.8rem;
-    flex-wrap:       wrap;
-    gap:             .5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--grey-2);
   }
   .section-header h2 {
-    font-family:    var(--font-mono);
-    font-size:      .66rem;
-    letter-spacing: .12em;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .18em;
     text-transform: uppercase;
-    color:          var(--ink-3);
-    font-weight:    400;
+    color: var(--grey-4);
   }
   .section-header .count {
-    font-family:    var(--font-mono);
-    font-size:      .62rem;
-    color:          var(--rule);
-    letter-spacing: .06em;
+    font-size: .7rem;
+    color: var(--grey-3);
+    letter-spacing: .05em;
   }
 
-  /* Article cards */
+  /* ── CARDS ── */
   .articles {
-    display:               grid;
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:                   1px;
-    background:            var(--rule);
-    border:                1px solid var(--rule);
+    gap: 1.5rem;
   }
-
   .card {
-    background:      var(--parchment);
-    padding:         2rem 1.8rem 1.6rem;
-    display:         flex;
-    flex-direction:  column;
+    background: var(--white);
+    border: 1px solid var(--grey-2);
+    padding: 2rem 1.8rem 1.6rem;
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
-    color:           inherit;
-    position:        relative;
-    transition:      background 0.15s ease;
-    overflow:        hidden;
+    color: inherit;
+    position: relative;
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+    overflow: hidden;
   }
   .card::before {
-    content:    '';
-    position:   absolute;
-    top:        0; left: 0; right: 0;
-    height:     3px;
-    background: var(--card-accent, var(--rule));
-    transition: height .2s ease;
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--grey-2));
+    transition: height .2s;
   }
-  .card:hover { background: var(--parchment-2); }
-  .card:hover::before { height: 5px; }
+  .card:not(.forthcoming):hover {
+    border-color: var(--blue);
+    box-shadow: 0 4px 20px rgba(31,86,210,.1);
+    transform: translateY(-2px);
+  }
+  .card:not(.forthcoming):hover::before { height: 4px; }
 
   .card-number {
-    font-family:    var(--font-mono);
-    font-size:      .58rem;
-    letter-spacing: .12em;
+    font-size: .66rem;
+    font-weight: 600;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    color:          var(--ink-3);
-    margin-bottom:  1rem;
-    display:        flex;
-    align-items:    center;
+    color: var(--grey-3);
+    margin-bottom: .9rem;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
   }
 
   .status-badge {
-    font-family:    var(--font-mono);
-    font-size:      .55rem;
+    font-size: .62rem;
+    font-weight: 600;
     letter-spacing: .1em;
     text-transform: uppercase;
-    padding:        .15rem .45rem;
-    border-radius:  2px;
+    padding: .2rem .55rem;
+    border-radius: 2px;
   }
   .status-badge.published {
-    color:      var(--published);
-    background: color-mix(in srgb, var(--published) 10%, transparent);
-    border:     1px solid color-mix(in srgb, var(--published) 30%, transparent);
+    color: var(--green);
+    background: rgba(0,102,68,.08);
+    border: 1px solid rgba(0,102,68,.2);
   }
   .status-badge.forthcoming {
-    color:      var(--forthcoming);
-    background: color-mix(in srgb, var(--forthcoming) 8%, transparent);
-    border:     1px solid var(--rule);
+    color: var(--forthcoming);
+    background: var(--grey-1);
+    border: 1px solid var(--grey-2);
   }
 
   .card-title {
-    font-family:   var(--font-display);
-    font-size:     1.3rem;
-    font-weight:   700;
-    line-height:   1.2;
-    color:         var(--ink);
-    margin-bottom: .5rem;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: .55rem;
   }
   .card-title em {
-    font-weight: 400;
-    font-style:  italic;
-    color:       var(--ink-2);
-    display:     block;
-    font-size:   .95em;
+    display: block;
+    font-size: .9em;
+    color: var(--grey-4);
+    font-style: italic;
+    margin-top: .15rem;
   }
 
   .card-deck {
-    font-size:     .9rem;
-    line-height:   1.6;
-    color:         var(--ink-2);
-    font-weight:   300;
+    font-size: .9rem;
+    line-height: 1.65;
+    color: var(--grey-4);
+    font-weight: 400;
     margin-bottom: 1.4rem;
-    flex:          1;
+    flex: 1;
   }
 
   .card-footer {
-    border-top:  1px solid var(--rule);
+    border-top: 1px solid var(--grey-1);
     padding-top: .8rem;
-    display:     flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap:   wrap;
-    gap:         .4rem;
+    flex-wrap: wrap;
+    gap: .4rem;
   }
   .card-tags {
-    display:    flex;
-    gap:        .5rem;
-    flex-wrap:  wrap;
+    display: flex;
+    gap: .4rem;
+    flex-wrap: wrap;
   }
   .card-tag {
-    font-family:    var(--font-mono);
-    font-size:      .55rem;
-    letter-spacing: .08em;
+    font-size: .6rem;
+    font-weight: 500;
+    letter-spacing: .07em;
     text-transform: uppercase;
-    color:          var(--ink-3);
-    background:     var(--parchment-2);
-    padding:        .1rem .4rem;
-    border-radius:  2px;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: .15rem .45rem;
+    border-radius: 2px;
   }
-  .card:hover .card-tag { background: var(--parchment-3); }
-
+  .card.forthcoming .card-tag {
+    color: var(--grey-3);
+    background: var(--grey-1);
+  }
   .card-arrow {
-    font-size: .8rem;
-    color:     var(--rule);
-    transition: color .15s, transform .15s;
+    font-size: .85rem;
+    color: var(--blue);
+    font-weight: 700;
+    transition: transform .15s;
   }
-  .card:hover .card-arrow {
-    color:     var(--ink-2);
-    transform: translateX(3px);
-  }
+  .card:not(.forthcoming):hover .card-arrow { transform: translateX(4px); }
+  .card.forthcoming { cursor: default; }
+  .card.forthcoming .card-title,
+  .card.forthcoming .card-deck { opacity: .45; }
   .card.forthcoming .card-arrow { display: none; }
 
-  /* ── FORTHCOMING STRIPE ── */
-  .card.forthcoming {
-    cursor: default;
-  }
-  .card.forthcoming .card-title,
-  .card.forthcoming .card-deck {
-    opacity: .55;
-  }
-
-  /* ── ABOUT STRIP ── */
+  /* ── ABOUT ── */
   .about-strip {
-    max-width:    900px;
-    margin:       0 auto;
-    padding:      0 3rem 5rem;
-    border-top:   1px solid var(--rule);
-    padding-top:  2.5rem;
-    display:      grid;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 3rem 4rem;
+    border-top: 1px solid var(--grey-2);
+    display: grid;
     grid-template-columns: 2fr 1fr;
-    gap:          3rem;
-    align-items:  start;
+    gap: 3rem;
+    align-items: start;
   }
   .about-strip h3 {
-    font-family:   var(--font-display);
-    font-size:     1.1rem;
-    font-style:    italic;
-    color:         var(--ink-2);
-    margin-bottom: .6rem;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: .7rem;
   }
   .about-strip p {
-    font-size:   .9rem;
-    line-height: 1.7;
-    color:       var(--ink-2);
-    font-weight: 300;
+    font-size: .9rem;
+    line-height: 1.75;
+    color: var(--grey-4);
+    font-weight: 400;
   }
   .about-links {
     list-style: none;
-    padding:    0;
+    padding: 0;
   }
   .about-links li {
-    font-family:    var(--font-mono);
-    font-size:      .62rem;
-    letter-spacing: .06em;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .05em;
     text-transform: uppercase;
-    color:          var(--ink-3);
-    padding:        .5rem 0;
-    border-bottom:  1px solid var(--rule);
+    color: var(--grey-4);
+    padding: .55rem 0;
+    border-bottom: 1px solid var(--grey-2);
   }
-  .about-links li:first-child { border-top: 1px solid var(--rule); }
+  .about-links li:first-child { border-top: 1px solid var(--grey-2); }
   .about-links a {
-    color:           inherit;
+    color: inherit;
     text-decoration: none;
-    display:         flex;
+    display: flex;
     justify-content: space-between;
+    transition: color .15s;
   }
-  .about-links a:hover { color: var(--ink); }
+  .about-links a:hover { color: var(--blue); }
 
   /* ── FOOTER ── */
   .site-footer {
-    border-top:     1px solid var(--rule);
-    padding:        1.4rem 3rem;
-    font-family:    var(--font-mono);
-    font-size:      .58rem;
-    letter-spacing: .06em;
+    background: var(--navy);
+    padding: 1.5rem 3rem;
+    font-size: .68rem;
+    font-weight: 400;
+    letter-spacing: .07em;
     text-transform: uppercase;
-    color:          var(--ink-3);
-    display:        flex;
+    color: rgba(255,255,255,.4);
+    display: flex;
     justify-content: space-between;
-    flex-wrap:      wrap;
-    gap:            .4rem;
+    flex-wrap: wrap;
+    gap: .5rem;
   }
 
-  /* ── Responsive ── */
   @media (max-width: 640px) {
-    .site-nav  { padding: 1rem 1.2rem; }
-    .hero      { padding: 3rem 1.2rem 0; }
-    .hero h1   { font-size: 3rem; }
-    .section-rule { margin: 2rem auto 0; padding: 0 1.2rem; }
-    .articles-section { padding: 1.5rem 1.2rem 4rem; }
+    .site-nav  { padding: 0 1.2rem; }
+    .hero      { padding: 3rem 1.2rem 3.5rem; }
+    .rule-bar  { margin: 0 1.2rem; }
+    .articles-section { padding: 2rem 1.2rem 3rem; }
     .articles  { grid-template-columns: 1fr; }
-    .about-strip { grid-template-columns: 1fr; padding: 1.5rem 1.2rem 3rem; gap: 1.8rem; }
+    .about-strip { grid-template-columns: 1fr; padding: 2rem 1.2rem 3rem; gap: 2rem; }
     .site-footer { padding: 1rem 1.2rem; }
-    .hero-meta { gap: 1rem; }
-    .site-nav .nav-links { display: none; }
+    .nav-links { display: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- ── Site Nav ── -->
+<!-- Nav -->
 <nav class="site-nav">
-  <a href="index.html" class="brand">Atlas · barryugo1.github.io</a>
+  <a href="index.html" class="brand">The Long Run <span>·</span> barryugo1.github.io</a>
   <ul class="nav-links">
     <li><a href="#essays">Essays</a></li>
     <li><a href="#about">About</a></li>
@@ -397,31 +410,33 @@
   </ul>
 </nav>
 
-<!-- ── Hero ── -->
+<!-- Hero -->
 <header class="hero">
-  <div class="hero-eyebrow">Visual Economic Essays</div>
-  <h1>Atlas<br><em>West Africa</em></h1>
-  <p class="hero-desc">Data-driven visual essays on the economic realities of West Africa. Every number is sourced. Every chart is drawn from primary data. Designed in the tradition of Edward Tufte — ink on parchment, no chartjunk.</p>
-  <div class="hero-meta">
-    <span><span class="dot live"></span>2 essays published</span>
-    <span><span class="dot"></span>2 forthcoming</span>
-    <span><span class="dot"></span>Sources: FAO · IEA · World Bank · IITA</span>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Essays on Economics, ML/AI &amp; Agriculture</div>
+    <h1>The Long<br><em>Run</em></h1>
+    <p class="hero-desc">Analytical essays at the intersection of economics, machine learning, and agriculture. Every argument is evidence-led. Every claim is sourced. Written in the tradition of systems thinking — tracing causes before conclusions.</p>
+    <div class="hero-pills">
+      <span class="hero-pill"><span class="dot live"></span>3 essays published</span>
+      <span class="hero-pill"><span class="dot"></span>2 forthcoming</span>
+      <span class="hero-pill"><span class="dot"></span>Topics: Economics · ML/AI · Agriculture</span>
+    </div>
   </div>
 </header>
 
-<hr class="section-rule">
+<div class="rule-bar"></div>
 
-<!-- ── Articles ── -->
+<!-- Articles -->
 <section class="articles-section" id="essays">
   <div class="section-header">
     <h2>Essays</h2>
-    <span class="count">4 items · 2 published</span>
+    <span class="count">5 items &nbsp;·&nbsp; 3 published</span>
   </div>
 
   <div class="articles">
 
     <!-- 1 — Energy -->
-    <a href="energy.html" class="card" style="--card-accent: #1f5e38;">
+    <a href="energy.html" class="card" style="--card-accent: #1F56D2;">
       <div class="card-number">
         No. 001
         <span class="status-badge published">Published</span>
@@ -442,7 +457,7 @@
     </a>
 
     <!-- 2 — Cassava -->
-    <a href="The Cassava Paradox in Nigeria.html" class="card" style="--card-accent: #4a7c3f;">
+    <a href="The Cassava Paradox in Nigera.html" class="card" style="--card-accent: #1F56D2;">
       <div class="card-number">
         No. 002
         <span class="status-badge published">Published</span>
@@ -462,10 +477,31 @@
       </div>
     </a>
 
-    <!-- 3 — Oil wealth (forthcoming) -->
-    <div class="card forthcoming" style="--card-accent: #b06820;">
+    <!-- 3 — World Bank Power Funds -->
+    <a href="World Bank Terminates $717.7 Million.html" class="card" style="--card-accent: #1F56D2;">
       <div class="card-number">
         No. 003
+        <span class="status-badge published">Published</span>
+      </div>
+      <div class="card-title">
+        $717.7 Million Terminated
+        <em>What the World Bank Cancellation Means for Nigeria's Economy</em>
+      </div>
+      <p class="card-deck">The World Bank's exit is not a story about a cancelled programme. It is a window into an economy where electricity failure has become a structural cost — embedded in inflation, suppressed investment, and capital permanently diverted from growth into survival.</p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="card-tag">Energy</span>
+          <span class="card-tag">Infrastructure</span>
+          <span class="card-tag">World Bank</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- 4 — Oil wealth (forthcoming) -->
+    <div class="card forthcoming" style="--card-accent: #D8DCE6;">
+      <div class="card-number">
+        No. 004
         <span class="status-badge forthcoming">Forthcoming</span>
       </div>
       <div class="card-title">
@@ -482,10 +518,10 @@
       </div>
     </div>
 
-    <!-- 4 — Vietnam vs Nigeria (forthcoming) -->
-    <div class="card forthcoming" style="--card-accent: #8b3a1c;">
+    <!-- 5 — Vietnam vs Nigeria (forthcoming) -->
+    <div class="card forthcoming" style="--card-accent: #D8DCE6;">
       <div class="card-number">
-        No. 004
+        No. 005
         <span class="status-badge forthcoming">Forthcoming</span>
       </div>
       <div class="card-title">
@@ -505,26 +541,27 @@
   </div>
 </section>
 
-<!-- ── About ── -->
+<!-- About -->
 <section class="about-strip" id="about">
   <div>
     <h3>About this project</h3>
-    <p>Atlas is a personal collection of visual economic essays on West Africa, built in the tradition of Edward Tufte's <em>The Visual Display of Quantitative Information</em>. Every chart uses verifiable primary source data — FAO, IEA, World Bank, IITA — and only what can be verified appears. Estimates and projections are always labelled as such.</p>
-    <p style="margin-top:.8rem;">The goal is not to be comprehensive, but to be precise: one question, one dataset, one clear answer per essay.</p>
+    <p>The Long Run is a personal essay series at the intersection of economics, machine learning, and agriculture. The analytical approach draws on systems thinking — tracing structural causes rather than surface symptoms, and holding every argument to the standard of verifiable evidence.</p>
+    <p style="margin-top:.8rem;">Each essay addresses one question with precision. No projections without labels. No data without sources. No conclusions without causal caution.</p>
   </div>
   <div>
     <ul class="about-links">
       <li><a href="https://github.com/barryugo1" target="_blank"><span>GitHub</span> <span>↗</span></a></li>
       <li><a href="energy.html"><span>Essay 001 — Energy</span> <span>→</span></a></li>
       <li><a href="cassava-paradox.html"><span>Essay 002 — Cassava</span> <span>→</span></a></li>
+      <li><a href="nigeria-wb-power-funds.html"><span>Essay 003 — Power Funds</span> <span>→</span></a></li>
     </ul>
   </div>
 </section>
 
-<!-- ── Footer ── -->
+<!-- Footer -->
 <footer class="site-footer">
-  <span>Atlas · barryugo1.github.io · Barry Ugochukwu</span>
-  <span>Tufte-style visual economics · West Africa</span>
+  <span>The Long Run · barryugo1.github.io · Barry Ugochukwu</span>
+  <span>Economics · ML/AI · Agriculture</span>
 </footer>
 
 </body>
