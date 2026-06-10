@@ -64,12 +64,12 @@
 
   /* ── EXEC SUMMARY ─────────────────────────── */
   .exec-summary { background: var(--blue); padding: 36px 48px; }
-  .exec-inner { max-width: var(--col); margin: 0 auto; display: grid; grid-template-columns: 180px 1fr; gap: 36px; align-items: start; }
-  .exec-label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); padding-top: 2px; }
+  .exec-inner { max-width: var(--col); margin: 0 auto; }
+  .exec-label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 20px; }
   .exec-points { list-style: none; }
-  .exec-points li { font-family: var(--sans); font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,.88); padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.1); display: flex; gap: 12px; }
+  .exec-points li { font-family: var(--sans); font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,.88); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
   .exec-points li:last-child { border-bottom: none; padding-bottom: 0; }
-  .exec-points li::before { content: '—'; font-family: var(--mono); color: rgba(255,255,255,.35); flex-shrink: 0; margin-top: 1px; }
+  .exec-points li::before { content: '— '; font-family: var(--mono); color: rgba(255,255,255,.35); }
 
   /* ── FORECAST LEDGER ──────────────────────── */
   .forecast-ledger { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 28px 0; }
@@ -201,7 +201,6 @@
 
   @media (max-width: 700px) {
     .topbar, .cat-band, .hero, .main, .wide, .appendix, .conclusion, .site-footer, .divider, .exec-summary { padding-left: 20px; padding-right: 20px; }
-    .exec-inner { grid-template-columns: 1fr; gap: 14px; }
     .cover-meta, .forecast-ledger { grid-template-columns: 1fr 1fr; }
     .var-grid, .rec-grid { grid-template-columns: 1fr; }
   }
